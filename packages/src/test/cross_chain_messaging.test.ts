@@ -1,9 +1,11 @@
-import { beforeEach, describe, expect, it, jest } from '@jest/globals'
-import { AccountWallet, AztecAddress, type DebugLogger, EthAddress, Fr, computeAuthWitMessageHash, createDebugLogger, createPXEClient, waitForPXE, L1ToL2Message, L1Actor, L2Actor } from '@aztec/aztec.js';
+import { beforeAll, beforeEach, describe, expect, it, jest } from '@jest/globals'
+import { AccountWallet, AztecAddress, BatchCall, type DebugLogger, EthAddress, Fr, computeAuthWitMessageHash, createDebugLogger, createPXEClient, waitForPXE, L1ToL2Message, L1Actor, L2Actor, type Wallet } from '@aztec/aztec.js';
 import { getInitialTestAccountsWallets } from '@aztec/accounts/testing';
 import { TokenContract } from '@aztec/noir-contracts.js/Token';
 import { TokenBridgeContract } from './fixtures/TokenBridge.js';
 import { createAztecNodeClient } from '@aztec/circuit-types';
+import { deployInstance, registerContractClass } from '@aztec/aztec.js/deployment';
+import { SchnorrAccountContractArtifact } from '@aztec/accounts/schnorr';
 
 import { CrossChainTestHarness } from '../shared/cross_chain_test_harness.js';
 import { mnemonicToAccount } from 'viem/accounts';
@@ -17,6 +19,16 @@ const { PXE_URL = 'http://localhost:8080', ETHEREUM_HOST = 'http://localhost:854
 const MNEMONIC = 'test test test test test test test test test test test junk';
 const hdAccount = mnemonicToAccount(MNEMONIC);
 const aztecNode = createAztecNodeClient(PXE_URL);
+
+async function publicDeployAccounts(sender: Wallet, accountsToDeploy: Wallet[]) {
+    const accountAddressesToDeploy = accountsToDeploy.map(a => a.getAddress());
+    const instances = await Promise.all(accountAddressesToDeploy.map(account => sender.getContractInstance(account)));
+    const batch = new BatchCall(sender, [
+        (await registerContractClass(sender, SchnorrAccountContractArtifact)).request(),
+        ...instances.map(instance => deployInstance(sender, instance!).request()),
+    ]);
+    await batch.send().wait();
+}
 
 describe('e2e_cross_chain_messaging', () => {
     jest.setTimeout(90_000);
@@ -33,11 +45,18 @@ describe('e2e_cross_chain_messaging', () => {
     let l2Bridge: TokenBridgeContract;
     let outbox: any;
 
+    beforeAll(async () => {
+        logger = createDebugLogger('aztec:e2e_uniswap');
+        const pxe = createPXEClient(PXE_URL);
+        await waitForPXE(pxe);
+        wallets = await getInitialTestAccountsWallets(pxe);
+        await publicDeployAccounts(wallets[0], wallets);
+    })
+
     beforeEach(async () => {
         logger = createDebugLogger('aztec:e2e_uniswap');
         const pxe = createPXEClient(PXE_URL);
         await waitForPXE(pxe);
-        const wallets = await getInitialTestAccountsWallets(pxe);
 
         const walletClient = createWalletClient({
             account: hdAccount,
@@ -67,6 +86,7 @@ describe('e2e_cross_chain_messaging', () => {
         user2Wallet = wallets[1];
         // logger('Successfully deployed contracts and initialized portal');
     });
+
     it('Privately deposit funds from L1 -> L2 and withdraw back to L1', async () => {
         // Generate a claim secret using pedersen
         const l1TokenBalance = 1000000n;
