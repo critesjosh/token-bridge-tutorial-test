@@ -43,6 +43,7 @@ Run the tests
 
 ```bash
 cd packages/src
+yarn
 DEBUG='aztec:e2e_uniswap' yarn test
 ```
 
