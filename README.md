@@ -27,7 +27,7 @@ aztec-builder codegen target -o ../../src/test/fixtures
 
 ```bash
 yarn
-cd l1-contracts
+cd l1-contract
 npx hardhat compile
 ```
 
