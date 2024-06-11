@@ -1,12 +1,12 @@
 # Token bridge tutorial
 
-This is running through the token bridge tutorial off of aztec-packages `0.41.0` branch on June 3rd.
+This is running through the token bridge tutorial off of aztec-packages `0.42.0` branch on June 11th.
 
 ## Testing
 
 ### Update
 
-Use 0.41.0build for `aztec-up`:
+Use 0.42.0 build for `aztec-up`:
 
 ```bash
 aztec-up
