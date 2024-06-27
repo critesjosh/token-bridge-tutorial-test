@@ -47,6 +47,8 @@ npx hardhat compile
 
 ### Run
 
+:warning: You might need to restart the sandbox between testing runs, since the test will produce the same note commitments and nullifiers, which the sequencer will reject.
+
 Run the sandbox
 
 ```bash
