@@ -1,16 +1,30 @@
 # Token bridge tutorial
 
-This is running through the token bridge tutorial off of aztec-packages `0.42.0` branch on June 11th.
+This is running through the token bridge tutorial off of aztec-packages `0.44.0` branch on June 27th.
+
+## Requirements
+
+- node.js version 18.x.x
+- Aztec sandbox, install with:
+
+```bash
+  bash -i <(curl -s install.aztec.network)
+```
 
 ## Testing
 
 ### Update
 
-Use 0.42.0 build for `aztec-up`:
+Use 0.44.0 build for `aztec-up`:
 
 ```bash
 aztec-up
 ```
+
+#### Dependencies
+
+- Update dependencies in Nargo.toml in `packages/aztec-contracts/token_bridge` to your version.
+- Update @aztec package versions in `packages/src/package.json` to your version.
 
 ### Compile
 
