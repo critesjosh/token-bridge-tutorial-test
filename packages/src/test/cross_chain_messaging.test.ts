@@ -1,5 +1,5 @@
 import { beforeAll, describe, beforeEach, expect, jest, it, } from '@jest/globals'
-import { AccountWallet, AztecAddress, BatchCall, type DebugLogger, EthAddress, Fr, computeAuthWitMessageHash, createDebugLogger, createPXEClient, waitForPXE, L1ToL2Message, L1Actor, L2Actor, type Wallet } from '@aztec/aztec.js';
+import { AccountWallet, AztecAddress, BatchCall, type DebugLogger, EthAddress, Fr, computeAuthWitMessageHash, createDebugLogger, createPXEClient, waitForPXE, L1ToL2Message, L1Actor, L2Actor, type Wallet, PXE } from '@aztec/aztec.js';
 import { getInitialTestAccountsWallets } from '@aztec/accounts/testing';
 import { TokenContract } from '@aztec/noir-contracts.js/Token';
 import { sha256ToField } from '@aztec/foundation/crypto';
@@ -20,8 +20,15 @@ const aztecNode = createAztecNodeClient(PXE_URL);
 export const NO_L1_TO_L2_MSG_ERROR =
     /No non-nullified L1 to L2 message found for message hash|Tried to consume nonexistent L1-to-L2 message/;
 
-async function publicDeployAccounts(sender: Wallet, accountsToDeploy: Wallet[]) {
-    const accountAddressesToDeploy = accountsToDeploy.map(a => a.getAddress());
+async function publicDeployAccounts(sender: Wallet, accountsToDeploy: Wallet[], pxe: PXE) {
+    const accountAddressesToDeploy = await Promise.all(
+        accountsToDeploy.map(async a => {
+            const address = await a.getAddress();
+            const isDeployed = await pxe.isContractPubliclyDeployed(address);
+            return { address, isDeployed };
+        })
+    ).then(results => results.filter(result => !result.isDeployed).map(result => result.address));
+    if (accountAddressesToDeploy.length === 0) return
     const instances = await Promise.all(accountAddressesToDeploy.map(account => sender.getContractInstance(account)));
     const batch = new BatchCall(sender, [
         (await registerContractClass(sender, SchnorrAccountContractArtifact)).request(),
@@ -52,7 +59,7 @@ describe('e2e_cross_chain_messaging', () => {
         wallets = await getInitialTestAccountsWallets(pxe);
 
         // deploy the accounts publicly to use public authwits
-        await publicDeployAccounts(wallets[0], wallets);
+        await publicDeployAccounts(wallets[0], wallets, pxe);
     })
 
     beforeEach(async () => {
