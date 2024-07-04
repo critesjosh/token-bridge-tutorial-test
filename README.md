@@ -21,6 +21,12 @@ Use 0.44.0 build for `aztec-up`:
 aztec-up
 ```
 
+or
+
+```bash
+VERSION=0.44.0 aztec-up
+```
+
 #### Dependencies
 
 - Update dependencies in Nargo.toml in `packages/aztec-contracts/token_bridge` to your version.
