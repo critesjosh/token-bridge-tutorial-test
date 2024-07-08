@@ -1,6 +1,6 @@
 # Token bridge tutorial
 
-This is running through the token bridge tutorial off of aztec-packages `0.44.0` branch on June 27th.
+This is running through the token bridge tutorial off of aztec-packages `0.45.1` branch on July 8th.
 
 ## Requirements
 
@@ -15,7 +15,7 @@ This is running through the token bridge tutorial off of aztec-packages `0.44.0`
 
 ### Update
 
-Use 0.44.0 build for `aztec-up`:
+Use 0.45.1 build for `aztec-up`:
 
 ```bash
 aztec-up
