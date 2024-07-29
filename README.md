@@ -1,6 +1,6 @@
 # Token bridge tutorial
 
-This is running through the token bridge tutorial off of aztec-packages `0.45.1` branch on July 8th.
+This is running through the token bridge tutorial off of aztec-packages `0.47.0` branch on July 29.
 
 ## Requirements
 
@@ -15,7 +15,7 @@ This is running through the token bridge tutorial off of aztec-packages `0.45.1`
 
 ### Update
 
-Use 0.45.1 build for `aztec-up`:
+Use 0.47.0 build for `aztec-up`:
 
 ```bash
 aztec-up
@@ -40,7 +40,7 @@ VERSION=0.44.0 aztec-up
 cd packages/aztec-contracts/token_bridge
 aztec-nargo compile
 # the output is already committed in this repo, but you'll have to rerun this if you change anything in the contract
-aztec-builder codegen target -o ../../src/test/fixtures
+aztec codegen target -o ../../src/test/fixtures
 ```
 
 #### L1 contracts
