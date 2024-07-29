@@ -24,7 +24,7 @@ aztec-up
 or
 
 ```bash
-VERSION=0.44.0 aztec-up
+VERSION=0.47.0 aztec-up
 ```
 
 #### Dependencies
@@ -58,7 +58,7 @@ npx hardhat compile
 Run the sandbox
 
 ```bash
-aztec-sandbox
+aztec start --sandbox
 ```
 
 Run the tests
