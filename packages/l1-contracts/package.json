@@ -26,10 +26,10 @@
     "typescript": "^5.4.5"
   },
   "dependencies": {
-    "@aztec/foundation": "^0.41.0",
-    "@aztec/l1-contracts": "^0.35.0",
+    "@aztec/foundation": "^0.66.0",
+    "@aztec/l1-contracts": "^0.66.0",
     "@nomicfoundation/hardhat-ethers": "^3.0.0",
-    "@openzeppelin/contracts": "^5.0.2",
+    "@openzeppelin/contracts": "^5.1.0",
     "ethers": "^6.12.1"
   }
 }
