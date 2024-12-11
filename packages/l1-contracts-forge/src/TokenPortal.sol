@@ -9,7 +9,6 @@ import {IInbox} from "@aztec/l1-contracts/src/core/interfaces/messagebridge/IInb
 import {IOutbox} from "@aztec/l1-contracts/src/core/interfaces/messagebridge/IOutbox.sol";
 import {IRollup} from "@aztec/l1-contracts/src/core/interfaces/IRollup.sol";
 import {DataStructures} from "@aztec/l1-contracts/src/core/libraries/DataStructures.sol";
-// docs:start:content_hash_sol_import
 import {Hash} from "@aztec/l1-contracts/src/core/libraries/crypto/Hash.sol";
 
 contract TokenPortal {
@@ -130,4 +129,3 @@ function withdraw(
 }
 }
 
-}
