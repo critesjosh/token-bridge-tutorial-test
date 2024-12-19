@@ -1,13 +1,29 @@
-# Sample Hardhat Project
+# L1 Contracts
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a Hardhat Ignition module that deploys that contract.
+## Dependencies
 
-Try running some of the following tasks:
+```bash
+curl -L https://foundry.paradigm.xyz | bash
+```
 
-```shell
-npx hardhat help
-npx hardhat test
-REPORT_GAS=true npx hardhat test
-npx hardhat node
-npx hardhat ignition deploy ./ignition/modules/Lock.js
+## Install
+
+```bash
+# Install OpenZeppelin
+forge install OpenZeppelin/openzeppelin-contracts --no-commit
+
+# Install Aztec packages
+forge install AztecProtocol/aztec-packages@aztec-packages-v0.67.1 --no-commit
+```
+
+## Copy Portal
+
+```bash
+cp lib/aztec-packages/l1-contracts/test/portals/TokenPortal.sol src/TokenPortal.sol
+```
+
+## Compile
+
+```bash
+forge build
 ```
