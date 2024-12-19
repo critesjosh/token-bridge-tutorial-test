@@ -1,6 +1,6 @@
 # Token bridge tutorial
 
-This is running through the token bridge tutorial off of aztec-packages `0.47.0` branch on July 29.
+WIP to get working with aztec v 0.67.0
 
 ## Requirements
 
@@ -10,27 +10,6 @@ This is running through the token bridge tutorial off of aztec-packages `0.47.0`
 ```bash
   bash -i <(curl -s install.aztec.network)
 ```
-
-## Testing
-
-### Update
-
-Use 0.47.0 build for `aztec-up`:
-
-```bash
-aztec-up
-```
-
-or
-
-```bash
-VERSION=0.47.0 aztec-up
-```
-
-#### Dependencies
-
-- Update dependencies in Nargo.toml in `packages/aztec-contracts/token_bridge` to your version.
-- Update @aztec package versions in `packages/src/package.json` to your version.
 
 ### Compile
 
@@ -56,24 +35,6 @@ curl -L https://foundry.paradigm.xyz | bash
 ```bash
 cd packages/l1-contracts-forge
 forge build
-```
-
-### Run
-
-:warning: You might need to restart the sandbox between testing runs, since the test will produce the same note commitments and nullifiers, which the sequencer will reject.
-
-Run the sandbox
-
-```bash
-aztec start --sandbox
-```
-
-Run the tests
-
-```bash
-cd packages/src
-yarn
-DEBUG='aztec:e2e_uniswap' yarn test
 ```
 
 ## Updated
