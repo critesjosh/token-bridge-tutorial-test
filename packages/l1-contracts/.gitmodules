@@ -1,6 +1,0 @@
-[submodule "lib/openzeppelin-contracts"]
-	path = lib/openzeppelin-contracts
-	url = https://github.com/OpenZeppelin/openzeppelin-contracts
-[submodule "lib/aztec-packages"]
-	path = lib/aztec-packages
-	url = https://github.com/AztecProtocol/aztec-packages

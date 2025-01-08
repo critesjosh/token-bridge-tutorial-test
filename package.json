@@ -6,8 +6,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "NODE_NO_WARNINGS=1 node --experimental-vm-modules $(yarn bin jest)",
-    "start": "node --loader ts-node/esm index.ts"
+    "start": "node --import tsx index.ts"
   },
   "dependencies": {
     "@aztec/accounts": "0.69.1",
@@ -18,15 +17,11 @@
     "@aztec/noir-contracts.js": "0.69.1",
     "@aztec/types": "0.69.1",
     "@types/node": "^22.10.5",
-    "typescript": "^5.7.2",
+    "typescript": "^5.7.3",
     "viem": "^2.7.15"
   },
   "devDependencies": {
-    "@jest/globals": "^29.7.0",
-    "@types/jest": "^29.5.14",
-    "jest": "^29.7.0",
-    "ts-jest": "^29.1.4",
-    "ts-node": "^10.9.2"
+    "tsx": "^4.19.2"
   },
   "packageManager": "yarn@1.22.21+sha1.1959a18351b811cdeedbd484a8f86c3cc3bbaf72"
 }

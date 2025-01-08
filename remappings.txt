@@ -1,1 +1,0 @@
-@aztec/l1-contracts/=lib/aztec-packages/l1-contracts/src/ 
