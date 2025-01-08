@@ -3,3 +3,5 @@
 WIP to get working with aztec v 0.69.1
 
 This new version that only uses published npm packages.
+
+Check [./index.ts](./index.ts) for the code.
