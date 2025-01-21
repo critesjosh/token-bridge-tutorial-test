@@ -129,6 +129,7 @@ async function main() {
     logger.info(`Public L2 balance of ${ownerAztecAddress} is ${balance}`);
 
     logger.info('Withdrawing funds from L2');
+
     const withdrawAmount = 9n;
     const nonce = Fr.random();
 
@@ -150,8 +151,14 @@ async function main() {
     const newL2Balance = await l2TokenContract.methods.balance_of_public(ownerAztecAddress).simulate();
     logger.info(`New L2 balance of ${ownerAztecAddress} is ${newL2Balance}`);
 
-    await l1PortalManager.withdrawFunds(withdrawAmount, ownerEthAddress, l2TxReceipt.blockNumber!,
-        // need message index and sibling path
+
+    const [l2ToL1MessageIndex, siblingPath] = await pxe.getL2ToL1MembershipWitness(await pxe.getBlockNumber(), l2ToL1Message)
+    await l1PortalManager.withdrawFunds(
+        withdrawAmount,
+        EthAddress.fromString(ownerEthAddress),
+        BigInt(l2TxReceipt.blockNumber!),
+        l2ToL1MessageIndex,
+        siblingPath
     );
     const newL1Balance = await l1TokenManager.getL1TokenBalance(ownerEthAddress);
     logger.info(`New L1 balance of ${ownerEthAddress} is ${newL1Balance}`);
