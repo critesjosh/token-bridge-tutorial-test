@@ -17,13 +17,5 @@
     "resolveJsonModule": true,
     "composite": true,
     "skipLibCheck": true
-  },
-  "include": [
-    "packages/src/**/*",
-    "contracts/**/*.json",
-    "packages/src/**/*",
-    "packages/aztec-contracts/token_bridge/target/*.json"
-  ],
-  "exclude": ["node_modules", "**/*.spec.ts", "contracts/**/*.ts"],
-  "references": []
+  }
 }

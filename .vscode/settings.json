@@ -1,3 +1,4 @@
 {
-  "noir.nargoPath": "/home/josh/.aztec/bin/aztec-nargo"
+  "noir.nargoPath": "/home/josh/.aztec/bin/aztec-nargo",
+  "git.ignoreLimitWarning": true
 }

@@ -1,0 +1,27 @@
+{
+  "name": "src",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node --import tsx index.ts"
+  },
+  "dependencies": {
+    "@aztec/accounts": "0.71.0",
+    "@aztec/aztec.js": "0.71.0",
+    "@aztec/ethereum": "0.71.0",
+    "@aztec/l1-artifacts": "0.71.0",
+    "@aztec/l1-contracts": "0.71.0",
+    "@aztec/noir-contracts.js": "0.71.0",
+    "@aztec/types": "0.71.0",
+    "@types/node": "^22.10.5",
+    "typescript": "^5.7.3",
+    "viem": "^2.7.15"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.2"
+  },
+  "packageManager": "yarn@1.22.21+sha1.1959a18351b811cdeedbd484a8f86c3cc3bbaf72"
+}
